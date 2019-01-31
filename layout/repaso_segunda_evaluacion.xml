@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".repaso_segunda_evaluacion">
+<!-- SPINNER -->
+    <TextView
+        android:id="@+id/tituloApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="monospace"
+        android:text="Aplicación de repaso"
+        android:textAllCaps="true"
+        android:textColor="@color/colorTitulo"
+        android:textSize="25dp" />
+
+    <TextView
+        android:id="@+id/textoSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tituloApp"
+        android:text="(Spinner) Ha seleccionado "
+        android:textColor="@color/colorTitulo"
+        android:textSize="15dp" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textoSpinner"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/colorSpinner"
+        android:spinnerMode="dropdown">
+
+    </Spinner>
+<!-- SEEKBAR -->
+    <TextView
+        android:id="@+id/tituloSeekBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner"
+        android:text="(SeekBar) Ha seleccionado "
+        android:layout_marginTop="10dp"/>
+
+    <SeekBar
+        android:id="@+id/seekbar"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tituloSeekBar"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/btnSeekBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/seekbar"
+        android:text="Introducir valor"/>
+
+    <EditText
+        android:id="@+id/escribirValorSeekBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seekbar"
+        android:layout_toEndOf="@id/btnSeekBar"
+        android:layout_marginTop="19dp"
+        android:layout_marginLeft="20dp"
+        android:hint="Introduzca un valor "
+        android:inputType="number"
+        android:maxLength="3"/>
+    <!-- El inputType condiciona al editText para que se introduzca un valor determinado
+         El maxLength solo deja que introduzca 3 caracteres (Ya que el máximo son 100)-->
+               <LinearLayout
+                   android:layout_below="@+id/escribirValorSeekBar"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/layoutProgressBar"
+                   android:orientation="vertical">
+
+                   <TextView
+                       android:id="@+id/tituloProgressBar"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:text="(Progressbar)"
+                       android:textAlignment="center"/>
+                   <ProgressBar
+                       android:id="@+id/progressBar"
+                       android:layout_width="200dp"
+                       android:layout_height="wrap_content"
+                       style="?android:progressBarStyleHorizontal"
+                       android:max="100"/>
+                    <Button
+                        android:id="@+id/btnProgressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pulsa"/>
+
+               </LinearLayout>
+</RelativeLayout>
+
