@@ -1,0 +1,85 @@
+LA APLICACIÓN CONSTARÁ DE DOS APARTADOS FUNDAMENTALES:
+	1-LISTA CON TODAS LAS CANCIONES(TITULO,ARTISTA,DURACION Y FOTO DEL DISCO).
+	2-REPORDUCTOR DE CANCIÓN AL PULSAR SOBRE UN ELEMENTO DE LA LISTA.
+
+1ºVamos al manifest y quitamos el tema del action bar para que nos quede una visualizacion más limpia.
+2ºCopiamos en la carpeta drawable todas las imagenes que vamos a utilizar en el proyecto.
+3ºEn el activity principal creamos un listview (en un constraint layout).
+4ºCreamos un nuevo activity, en el que meteremos unicamente los elementos que irán dentro de cada item del
+listview creado antes.(en este caso, crearemos el diseño de los distintos items, que serán canciones con:
+titulo,artista,duracion y foto del disco)
+5ºEn el activity de canciones, nos ayudamos de la vista de diseño, y creamos una serie de lineas de apoyo
+que nos permiten configurar como vamos a colocar los distintos elementos.(en concreto usamos 6 lineas,
+puesto que disponemos de 6 canciones) y además una vertical que nos permita colocar las imagenes de cada
+disco.
+6ºUna vez creadas las lineas, vamos con los elementos en cuestión.Primero añadimos un textview para el 
+titulo de la canción(y puesto que estamos trabajando en un constraint layout, lo fijamos a las lineas de guia 
+o apoyo que hemos creado antes), hacemos lo mismo con el textview para el artista(fijandolo en el siguiente
+bloque de lineas de apoyo) e igual para el textview de la duración( este en la misma linea que el anterior)
+Una vez creados los textview, añadimos un imageview en el cual meteremos la imagen del disco, y la adaptamos 
+en la guia vertical que habiamos creado al inicio y la fijamos en esa posición.
+7ºTeniendo el listview creado por un lado, y el diseño de los distintos items, procedemos a la clase principal
+de java, en la cual:
+-Llamamos al listview.
+-Creamos un array(de strings) de dos dimensiones en el que meteremos info sobre la canción(titulo,artista,duración).
+-Creamos otro array ( de tipo int) de una dimension en el que meteremos los id de cada una de las fotografias, que
+corresponderán con la informacion del array de strings anteriormente realizado.
+-Por último buscamos el id de la lista de canciones(escribiendo el findviewbyid dentro del metodo oncreate)
+8ºA continuación, y dejando esta clase de lado, creamos una nueva clase en nuestro paquete, a la cual llamaremos 
+adapatador.Esta clase extends de BaseAdapter, que tiene una serie de metodos que nos permiten trabajar con
+las distintas vistas de diseño de xml(en concreto nos centraremos en el método getView).Una vez importados 
+todos los métodos, creamos una serie de variables:
+-Un private static LayoutInflater(el cual nos permitirá llamar o instanciar al xml en el que tenemos el diseño de la
+lista de canciones y demás)
+-Un Context, que nos permite hacer referencia al contexto de la aplicacion.
+-Y dos Arrays uno de strings y otro de tipo int, a los cuales les pasaremos la misma información que los arrays creados
+anteriormente, pero usando un constructor y metiendolos por paraámetro.
+9ºCreadas las variables, vamos a por el constructor,
+-Mismo nombre que la clase y le pasamos por paramtero las variables que hemos creado antes.
+-Inicializamos el Inflater(ya que antes lo teniamos como Null), que básicamente se encarga de instanciar el xml
+con el diseño de la lista.
+10ºDentro del método View getView, inicializamos lo siguiente:
+-Una vista a la cual le pasaremos el inflater, haciendo referencia al xml de canciones(en el cual tenemos el diseño
+de cada item que meteremos en la lista)
+-Creamos las variables (titulo,artista,duracion e imagen) y se las pasamos a la vista creada en el inflater.
+-A cada una de las variables le pasamos los datos de los arrays para añadirles informacion.(empleando la variable
+position del metodo en el que estamos trabajando).(En el caso del titulo, lo que hacemos es empleando la variable position del metodo view getView, en el cual
+estamos trabajando, nos permite ir recorriendo el array de datos del cual podemos sacar el titulo de la cancion
+,el artista, la duracion y por supuesto la imagen)
+-Creamos un método que nos permita mostrar un intent la imagen seleccionada en grande.
+/*	imagen.setTag(position);//con esto al hacer click en la imagen y abrirla, podremos saber a que imagen hemos pinchado y demás
+        imagen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent visorImagen= new Intent(contexto,VisorImagen.class);
+                visorImagen.putExtra("IMG",datosImagen[(Integer)v.getTag()]);
+                contexto.startActivity(visorImagen);
+            }
+        });
+*/(POR EL MOMENTO ESTE APARTADO LO DEJAMOS DE LADO PUESTO QUE ES UN ASPECTO SECUNDARIO Y NOS HACE FALTA CREAR UNA CLASE VISOR A LA QUE LLAMAR Y DEMÁS)
+11ºUna vez tenemos listo el adaptador de nuestra lista, volvemos a la clase principal:
+-En el método onCreate, a la lista, le pasamos el adaptador con los parametros,de contexto(que es la aplicacion),
+el array de datos y el array de imagenes.
+/* lista.setAdapter(new Adaptador(this,datosCanciones,datosImagen));*/
+(AHORA AL IR A EJECUTAR LA APLICACIÓN, COMO NO HA PEGADO FALLITO, DONDE, TE PREGUNTARÁS, PUES DONDE VA A SER
+EN LAS PRECIOSAS FOTOGRAFIAS QUE HE METIDO, QUE COMO SIEMPRE DEBIDO A QUE TIENEN MÁS CALIDAD DE LO QUE 
+ESTA MIERDA PUEDE PROCESAR PUES NO SE LAS COME Y ENTONCES PEGA FALLITO Y TE DICE UH LO SIENTO HEMOS TENIDO QUE 
+CERRAR LA APP PORQUE CLARO NO VAYA A SER QUE PONGAS ALGO DE CALIDAD AQUI VERDAD CAMPEON)
+(SOLUCIÓN, QUITAR TODAS LAS IMAGENES Y DEJAR SÓLO UNA QUE TIENE 152 KB Y QUE LA PEÑA SE IMAGINE
+LA PORTADA DEL DISCO O LO QUE BUENAMENTE QUIERA)
+(HASTA BUSCANDO EN STACK OVERFLOW EL FALLO QUE DABA Y ME DECIAN QUE CAMBIASE LAS IMAGENES DE CARPETA 
+O QUE ERA UN ERROR Y QUE HABIA QUE COPIAR UNA LINEA DE CODIGO, VAYANSE TODOS AL CARAJOO, NO SE PUEDEN
+NI METER FOTOS CON UNA CALIDAD ACEPTABLE NI CANCIONES ALGO LARGAS OSEAAA HELLLOOOOOOOUUUUU)
+
+12ºTras desahogarnos, procedemos con el siguiente paso.Crear una nueva clase llamada visorImagen, que nos
+permitirá al pulsar sobre la imagen en la lista, abrir una nueva actividad en la que meteremos el reproductor
+individual de cada canción.
+-Creamos una nueva actividad llamada activity_visor_imagen, en la cual unicamente pondremos la imagen que 
+seleccionemos en la lista.
+-Creamos la clase java VisorImagen, en la que llamamos a la imagen del activity creado recientemente,
+y con un Intent, recogemos el intent de la otra actividad(que es el que se inicia al pulsar la imagen en la lista)
+y se lo pasamos a un bundle que nos permitirá ver el mensaje, que en este caso es una referencia de la variable position
+que busca en el array de int imagenes[] y en funcion de la posicion y del array saca esa fotografía.
+En el bundle hacemos referencia a la etiqueta IMG, que le hemos dado en la clase adaptador al hacer el put extras del intent.
+(Con el intent, digamos que recogemos la llamada y con el bundle rcogemos el mensaje que quiere transmitir)
+

@@ -1,0 +1,11 @@
+APP CHECKBOX
+Si queremos pasar información de una actividad a otra debemos declarar en el manifest de nuestra actividad
+principal (o padre) el nombre de la activdad(por lo general al crearla, lo añade automático, pero por si acaso,
+mejor revisarlo).
+Si quisieramos añadir esta actividad, unicamente tendríamos que meter la sig. línea:
+<activity android:name=".AppCheckBoxIphone"></activity>
+Otro aspecto a tener en cuenta son las opciones que le vamos a dar a los checkbox, es decir, contemplar
+que uno este seleccionado y otro no, que los dos esten seleccionados, que ninguno este, etc.
+(se puede controlar con .isChecked())
+Y poco más, las virguerías que se quieran hacer con ellos son inabrcables (meter un intent y que abran nuevas
+views o activitys, que almacenen datos, etc)
