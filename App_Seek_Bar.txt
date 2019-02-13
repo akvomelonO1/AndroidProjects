@@ -1,0 +1,25 @@
+APP_SEEK_BAR
+Creamos las variables necesarias y hacemos un barra.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+{	//Podemos implementar una serie de metodos 
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+            {
+                //PARA MODIFICAR EL TAMAÑO Y EL PROGRESO DE LA BARRA, PERO TAMBN LO PODEMOS HACER DESDE XML
+                //barra.setMax(500);
+                //texto.setText(String.valueOf(i);
+                valorSeekBar.setText("El valor actual es: " + progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar)
+            {
+                Toast.makeText(getApplicationContext(),"onStartTrackingTouch(moquetes)",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar)
+            {
+                Toast.makeText(getApplicationContext(),"onStopTrackingTouch(moquetes)",Toast.LENGTH_SHORT).show();
+            }
+	
+});
