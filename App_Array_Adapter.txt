@@ -1,0 +1,30 @@
+APP_ARRAY_ADAPTER
+Por lo general se emplean los array adapter para crear listas y demás.
+Consiste en crear un array de datos del tipo que quieras y con la información que quieras:
+ final String[] datos = new String[]{"Elemento 1","Elemento 2","Elemento 3","Elemento 4"};
+A continuación, creamos un ListView
+        final ListView list = findViewById(R.id.lista);
+Y el adaptador:
+ ArrayAdapter <String> adaptador = new ArrayAdapter(this, android.R.layout.simple_list_item_activated_1,datos);//dentro del layout del ArrayAdapter hay una infinidad de opciones para escoger como se muestra
+        list.setAdapter(adaptador);//le pasamos el adaptador a la lista y ya está
+
+Hacemos un list.OnItemClickListener(new AdapterView.OnItemClickListener()
+{
+	//nos implementa el método onItemCLick(AdapterView<?> parent,View view,int position,long id)
+	
+	Public void onItemCLick(AdapterView<?> parent,View view,int position,long id)
+	{	//el id y position a efectos prácticos son lo mismo, es decir indican que item has seleccionado
+		if(id == 0)
+                {
+                    id=id+1; // para que sume 1 al id o se puede poner entre parentesis (id+1)
+                    Toast.makeText(getApplicationContext(), "Elemento " + id , Toast.LENGTH_SHORT).show();
+
+                }
+                else if(id == 1)
+                {
+                    id=id+1;
+                    Toast.makeText(getApplicationContext(), "Elemento " + id , Toast.LENGTH_SHORT).show();
+                }
+
+	}
+});
