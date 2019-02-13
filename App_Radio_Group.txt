@@ -1,0 +1,23 @@
+APP_RADIO_GROUP Y RADIO_BUTTON
+Lo único a tener en cuenta es que si queremos emplear los radiobuttons y que sólo uno se seleccione
+debemos englobarlos dentro de un radiogroup:
+ <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/opcion1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OPCIÓN 1"
+            />
+        <RadioButton
+            android:id="@+id/opcion2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OPCIÓN 2"
+            />
+
+  </RadioGroup>
+
