@@ -1,0 +1,72 @@
+APP_PROGRESS_BAR
+Si queremos controlar cuando se incia la barra de progreso, debemos asignar un evento eonclicklistener a 
+un boton.
+final Button boton= findViewById(R.id.boton);
+final ProgressBar barra=findViewById(R.id.barra);
+
+boton.setOnclickListener(new View.OnClickListener...)
+{
+	barra.setProgress(0);
+//a continuación creamos un switch que nos permita identificar el boton cuando lo pulsemos o no 
+//en función de su id
+	switch(v.getId())//coge el id de la view que hemos creado conn el onclick listener
+	{
+		case R.id.boton:
+		{
+			new MyAsyncTask.execute(100);//creamos una clase MyAsyncTask, que extiende asynctask
+			break;			     //y empleamos el metodo execute y el maximo de ejecucion
+		}
+	}
+}
+Todo lo anterior iría dentro del OnCreate, pero la clase MyAsynctask, va fuera del onCreate(pero dentro del java
+del proyecto).
+public class MyAsyncTask extends AsyncTask<Integer,Integer,String>//extendemos asynctask y le ponemos los parámetros
+{								//que van a devolver los métodos que vamos a implementar 
+	
+//Uno de los métodos a destacar es el de doInBackground,
+//en el cual
+//MÉTODO QUE SE EJECUTA POR DETRÁS
+	@Override
+        protected String doInBackground(Integer... integers)
+        {
+            for (int counter = 0; counter <= integers[0]; counter+=3)//Hacemos un for que es el que nos determina el progreso de la barra
+            {
+		//dentro del for creamos un try catch que nos permite recoger una excepcion y hacemos un sleep al hilo de ejecución de unos 500 milisecs
+                try {
+                    Thread.sleep(500);
+                    publishProgress(counter);//en el counter se va asignando el progreso de la barra según se recorre el for
+                }catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            return "Tarea completada monin.";
+        }
+
+//MÉTODO PARA DESPUÉS DE LA EJECUCIÓN
+	@Override
+        protected void onPostExecute(String s) {
+            texto.setText("Ejecución correcta...");
+            boton.setText("REINICIAR");
+            boton.setEnabled(true);
+        }
+
+//MÉTODO PARA ANTES DE LA EJECUCIÓN
+	@Override
+        protected void onPreExecute() 
+	{
+            texto.setText("Se procede a cagar la página.");
+        }
+
+//MÉTODO QUE SE EJECUTA DURANTE LA EJECUCIÓN (LA REDUNDANCIA REDUNDANTE XD)
+        protected void onProgressUpdate (Integer... values)
+        {
+            boton.setText("ESPERE...");
+            boton.setEnabled(false);
+            texto.setText("En ejecución..."+ values[0]);
+            barra.setProgress(values[0]);
+        }
+
+
+
+}
