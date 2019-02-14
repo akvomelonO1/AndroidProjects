@@ -1,0 +1,23 @@
+INTENT Y BUNDLE Y SUS PECULIARIDADES, PORQUE CLARO ESTA MIERDA DE LENGUAJE TIENE SUS COSITAS Y ES LA LECHE.
+La aplicación consiste en un TextView, un EditText y un Botón(de suputamadre).
+Una app que simplemente pasa los datos introducidos en el editText a otra actividad.
+Entonces, en el OnClickListener del botón, creamos lo siguiente:
+        boton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+		//CREAMOS UN INTENT QUE NOS LLEVE A LA SEGUNDA PANTALLA
+                Intent intent=new Intent(MainActivity.this,segunda_pantalla.class);
+		//CREAMOS UN BUNDLE EN EL QUE METEREMOS LA INFO DE LA PANTALLA PRINCI
+                Bundle b=new Bundle();
+		//LE METEMOS EN FORMATO STRING LOS ELEMENTOS QUE METEMOS EN UN EDITTEXT
+                b.putString("NUM_ELEM",elementos.getText().toString());
+		//METEMOS EN EL INTENT CON PUTEXTRAS EL BUNDLE
+                intent.putExtras(b);
+                startActivity(intent);
+            }
+        });
+
+Y en la pantalla Secundaria, simplemente:
+
+        Bundle b2=getIntent().getExtras();
+        texto.setText(b2.getString("NUM_ELEM"));
